@@ -77,7 +77,7 @@ public class ExplosiveBall : MonoBehaviour
     IEnumerator Explosion()
     {
         yield return new WaitForSeconds(1);
-
+        gameObject.transform.localScale = new Vector3(0, 0, 0);
         gameObject.SetActive(false);
     }
 }
