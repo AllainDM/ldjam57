@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
         // Движение в глобальных координатах
         if (inputVector.magnitude > 0.1f) // Если есть ввод с клавиатуры
         {
-            _animator.SetBool("IsSpeed", true);
+            _animator.SetBool("IsWalk", true);
 
             // Запоминаем направление движения (для поворота)
             _lastMovementDirection = inputVector;
@@ -103,14 +103,18 @@ public class Player : MonoBehaviour
                 RotateTowardsDirection(_lastMovementDirection, _movementRotationSpeed);
             }
         }
+        else
+        {
+            _animator.SetBool("IsWalk", false);
+        }
 
         // Поворот к точке по клику мыши (если есть)
         if (_targetDirection != Vector3.zero)
         {
             RotateTowardsDirection(_targetDirection, _rotationSpeed);
-            
+
             // Сброс цели при достижении
-            if (Quaternion.Angle(transform.rotation, 
+            if (Quaternion.Angle(transform.rotation,
                 Quaternion.LookRotation(_targetDirection)) < 1f)
             {
                 _targetDirection = Vector3.zero;
@@ -134,6 +138,7 @@ public class Player : MonoBehaviour
     public void Die()
     {
         _isAlive = false;
+        _animator.SetBool("IsAlive", false);
         GameManager.Instance.ShowDiePanel();
     }
 
