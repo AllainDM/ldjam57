@@ -1,18 +1,65 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static GameManager Instance { get; private set; }
+
+    [SerializeField] private GameObject[] _levels;
+
+    private int _curLevel = 0;
+
+    private void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            if (IsLastLevel())
+            {
+                FirstLevel();
+            }
+            else
+            {
+                NextLevel();
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void FirstLevel()
     {
-        
+        _curLevel = 0;
+        UpdateLevel(_curLevel);
+    }
+
+    public void NextLevel()
+    {
+        _curLevel++;
+        UpdateLevel(_curLevel);
+    }
+
+    public void LoadLevel(int level)
+    {
+        _curLevel = level;
+        UpdateLevel(_curLevel);
+    }
+
+    public bool IsLastLevel()
+    {
+        return _curLevel == _levels.Length - 1;
+    }
+
+    private void UpdateLevel(int curLevel)
+    {
+        for (int i = 0; i < _levels.Length; i++)
+        {
+            if (i == curLevel)
+            {
+                _levels[i].SetActive(true);
+                Vector3 startPoint = _levels[i].GetComponent<Level>().GetStartLevelPosition();
+                Player.Instance.transform.position = startPoint;
+            }
+            else
+            {
+                _levels[i].SetActive(false);
+            }
+        }
     }
 }
