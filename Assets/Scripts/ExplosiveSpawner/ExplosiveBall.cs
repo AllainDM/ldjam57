@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class ExplosiveBall : MonoBehaviour
 {
-    private Vector3 _startScale = new Vector3(0, 0, 0);
-    private Vector3 _endScale = new Vector3(10, 10, 10);
-    private float _duration = 10.0f;
-    private float _speed = 1.0f;
+    private Vector3 _startScale;
+    private Vector3 _endScale;
+    private float _duration;
+    private float _speed;
 
     private Vector3 _currentScale;
     private float _currentTime;
