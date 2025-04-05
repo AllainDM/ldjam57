@@ -11,7 +11,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) // ЛКМ
+        if (Input.GetMouseButtonDown(2)) // ЛКМ
         {
             Attack();
         }
