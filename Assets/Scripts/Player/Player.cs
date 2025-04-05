@@ -89,6 +89,8 @@ public class Player : MonoBehaviour
         // Движение в глобальных координатах
         if (inputVector.magnitude > 0.1f) // Если есть ввод с клавиатуры
         {
+            _animator.SetBool("IsSpeed", true);
+
             // Запоминаем направление движения (для поворота)
             _lastMovementDirection = inputVector;
             
