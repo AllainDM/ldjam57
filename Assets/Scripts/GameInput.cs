@@ -26,4 +26,9 @@ public class GameInput : MonoBehaviour
 
         return inputVector;
     }
+
+    public float GetRotationY()
+    {
+        return Input.GetAxis("Mouse X");
+    }
 }
