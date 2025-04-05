@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
 
+    [SerializeField] private Animator _animator;
+
     [SerializeField] float _speed = 4.0f;
     // [SerializeField] float _sensitivityHor = 100.0f;
     [SerializeField] float _rotationSpeed = 10.0f; // Скорость поворота к точке
@@ -39,6 +41,11 @@ public class Player : MonoBehaviour
             // Вычисляем направление от игрока к точке клика
             _targetDirection = clickPoint - transform.position;
             _targetDirection.y = 0; // Игнорируем разницу по высоте
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            GameManager.Instance.ShowPausePanel();
         }
     }
     // private void Start()
@@ -125,6 +132,7 @@ public class Player : MonoBehaviour
     public void Die()
     {
         _isAlive = false;
+        GameManager.Instance.ShowDiePanel();
     }
 
     public void Resurrect()
