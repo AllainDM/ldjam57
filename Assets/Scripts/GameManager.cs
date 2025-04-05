@@ -63,6 +63,16 @@ public class GameManager : MonoBehaviour
         return _curLevel == _levels.Length - 1;
     }
 
+    public void Pause()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void Unpause()
+    {
+        Time.timeScale = 1;
+    }
+
     private void UpdateLevel(int curLevel)
     {
         for (int i = 0; i < _levels.Length; i++)
