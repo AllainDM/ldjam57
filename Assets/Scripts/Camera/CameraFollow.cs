@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    [SerializeField] private float _cameraOffsetX = 3.0f;
-    [SerializeField] private float _cameraOffsetY = 8.0f;
+    [SerializeField] private float _cameraOffsetX = 13.0f;
+    [SerializeField] private float _cameraOffsetY = 18.0f;
     [SerializeField] private float _cameraOffsetZ = -14.0f;
 
     [SerializeField] private GameObject _targetObject;
