@@ -20,6 +20,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        FirstLevel();
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.N))
@@ -58,6 +63,31 @@ public class GameManager : MonoBehaviour
         return _curLevel == _levels.Length - 1;
     }
 
+    public void Pause()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void Unpause()
+    {
+        Time.timeScale = 1;
+    }
+
+    public void ShowWinPanel()
+    {
+
+    }
+
+    public void ShowDiePanel()
+    {
+
+    }
+
+    public void ShowPausePanel()
+    {
+
+    }
+
     private void UpdateLevel(int curLevel)
     {
         for (int i = 0; i < _levels.Length; i++)
@@ -67,6 +97,7 @@ public class GameManager : MonoBehaviour
                 _levels[i].SetActive(true);
                 Vector3 startPoint = _levels[i].GetComponent<Level>().GetStartLevelPosition();
                 Player.Instance.transform.position = startPoint;
+                Player.Instance.transform.Translate(0, 1, 0);
             }
             else
             {
