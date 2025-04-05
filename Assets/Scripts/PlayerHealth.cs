@@ -1,24 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int health = 100;
+    private int _health = 100;
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        Debug.Log("Здоровье игрока: " + health);
-        if (health <= 0) {
+        _health -= damage;
+        Debug.Log("Здоровье игрока: " + _health);
+
+        if (_health <= 0) {
             // Destroy(gameObject);
             Debug.Log("Игрока погиб.");
-            
-
-
+            Player.Instance.Die();
         }
-            
+    }
 
+    public int GetHealth()
+    {
+        return _health;
     }
 }
