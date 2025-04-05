@@ -30,7 +30,7 @@ public class ExplosiveBall : MonoBehaviour
         {
             _isExplosive = true;
             GetComponent<SphereCollider>().enabled = true;
-            GetComponent<MeshRenderer>().sharedMaterial.color = Color.red;
+            //GetComponent<MeshRenderer>().sharedMaterial.color = Color.red;
             StartCoroutine(Explosion());
         }
     }
