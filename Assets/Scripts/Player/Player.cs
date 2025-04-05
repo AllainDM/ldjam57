@@ -28,8 +28,6 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
-
 
     private void Update()
     {
