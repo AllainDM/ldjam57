@@ -10,7 +10,7 @@ public class EndLevelTrigger : MonoBehaviour
         }
         else
         {
-            // TODO: display a win panel
+            GameManager.Instance.ShowWinPanel();
         }
     }
 }
