@@ -1,10 +1,15 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
     [SerializeField] private GameObject[] _levels;
+
+    [SerializeField] private GameObject _winPanel;
+    [SerializeField] private GameObject _diePanel;
+    [SerializeField] private GameObject _pausePanel;
 
     private int _curLevel = 0;
 
@@ -42,6 +47,7 @@ public class GameManager : MonoBehaviour
 
     public void FirstLevel()
     {
+        Unpause();
         _curLevel = 0;
         UpdateLevel(_curLevel);
     }
@@ -75,17 +81,19 @@ public class GameManager : MonoBehaviour
 
     public void ShowWinPanel()
     {
-
+        Pause();
+        _winPanel.gameObject.SetActive(true);
     }
 
     public void ShowDiePanel()
     {
-
+        _diePanel.gameObject.SetActive(true);
     }
 
     public void ShowPausePanel()
     {
-
+        Pause();
+        _pausePanel.gameObject.SetActive(true);
     }
 
     private void UpdateLevel(int curLevel)

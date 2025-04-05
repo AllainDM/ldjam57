@@ -40,6 +40,11 @@ public class Player : MonoBehaviour
             _targetDirection = clickPoint - transform.position;
             _targetDirection.y = 0; // Игнорируем разницу по высоте
         }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            GameManager.Instance.ShowPausePanel();
+        }
     }
     // private void Start()
     // {
@@ -125,6 +130,7 @@ public class Player : MonoBehaviour
     public void Die()
     {
         _isAlive = false;
+        GameManager.Instance.ShowDiePanel();
     }
 
     public void Resurrect()
