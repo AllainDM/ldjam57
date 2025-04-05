@@ -8,6 +8,18 @@ public class GameManager : MonoBehaviour
 
     private int _curLevel = 0;
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.N))
