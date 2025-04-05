@@ -11,6 +11,12 @@ public class ExplosiveSpawner : MonoBehaviour
     [SerializeField] private GameObject _prefabDangerZone;
     [SerializeField] private GameObject _prefabBall;
 
+    [Header("Balls Settings")]
+    [SerializeField] private Vector3 _startScale = new Vector3(0, 0, 0);
+    [SerializeField] private Vector3 _endScale = new Vector3(10, 10, 10);
+    [SerializeField] private float _duration = 10.0f;
+    [SerializeField] private float _speed = 1.0f;
+
     private ObjectPool _objectPool;
     private void Start()
     {
@@ -28,7 +34,7 @@ public class ExplosiveSpawner : MonoBehaviour
             float randomX = Random.Range(transform.position.x - _distance, transform.position.x + _distance);
             float randomZ = Random.Range(transform.position.z - _distance, transform.position.z + _distance);
             ball.transform.position = new Vector3(randomX, 0, randomZ);
-            ball.GetComponent<ExplosiveBall>().Reset();
+            ball.GetComponent<ExplosiveBall>().Reset(_startScale, _endScale, _duration, _speed);
             //ball.GetComponentInChildren<LightningEffect>().SetRadius(ball.transform.localScale.x * 0.9f);
             ball.SetActive(true);
         }

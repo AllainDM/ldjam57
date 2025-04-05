@@ -28,7 +28,7 @@ public class ExplosiveBall : MonoBehaviour
         _currentScale = currentScale;
     }
 
-    public void SetEndRadius(Vector3 endScale)
+    public void SetEndScale(Vector3 endScale)
     {
         _endScale = endScale;
     }
@@ -38,8 +38,13 @@ public class ExplosiveBall : MonoBehaviour
         _duration = duration;
     }
 
-    public void Reset()
+    public void Reset(Vector3 startScale, Vector3 endScale, float duration, float speed)
     {
+        _startScale = startScale;
+        _endScale = endScale;
+        _duration = duration;
+        _speed = speed;
+
         _currentScale = _startScale;
         _currentTime = 0;
     }
