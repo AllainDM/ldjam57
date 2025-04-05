@@ -27,8 +27,25 @@ public class GameInput : MonoBehaviour
         return inputVector;
     }
 
-    public float GetRotationY()
+    // public float GetRotationY()
+    // {
+    //     return Input.GetAxis("Mouse X");
+    // }
+
+    // Новый метод для получения точки клика мыши
+    public bool TryGetMouseClickPoint(out Vector3 point)
     {
-        return Input.GetAxis("Mouse X");
+        point = Vector3.zero;
+        
+        if (Input.GetMouseButtonDown(0)) // Только при нажатии, а не удержании
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                point = hit.point;
+                return true;
+            }
+        }
+        return false;
     }
 }
