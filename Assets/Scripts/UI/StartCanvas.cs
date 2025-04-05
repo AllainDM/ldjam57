@@ -1,10 +1,8 @@
 using UnityEngine;
-using UnityEngine.UI; // Для работы с UI-элементами
+using UnityEngine.UI;
 
 public class StartCanvas : MonoBehaviour
 {
-    [SerializeField] private Button button;
-
     public void StartGame()
     {
         GameManager.Instance.FirstLevel();
