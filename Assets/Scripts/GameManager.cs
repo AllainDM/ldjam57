@@ -20,6 +20,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        FirstLevel();
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.N))
