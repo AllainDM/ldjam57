@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
 
+    [SerializeField] private Animator _animator;
+
     [SerializeField] float _speed = 4.0f;
     // [SerializeField] float _sensitivityHor = 100.0f;
     [SerializeField] float _rotationSpeed = 10.0f; // Скорость поворота к точке
