@@ -12,7 +12,7 @@ public class PlayerHealth : MonoBehaviour
         if (_health <= 0) {
             // Destroy(gameObject);
             Debug.Log("Игрока погиб.");
-            Player.Instance.Die();
+            // Player.Instance.Die();
         }
     }
 
