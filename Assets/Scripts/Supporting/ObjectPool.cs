@@ -43,7 +43,10 @@ namespace Supporting
 
             for (int i = 0; i < _pooledObjects.Count; i++)
             {
-                _pooledObjects[i].SetActive(false);
+                if (_pooledObjects[i] != null)
+                {
+                    _pooledObjects[i].SetActive(false);
+                }
             }
         }
     }
