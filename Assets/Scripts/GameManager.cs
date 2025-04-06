@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject[] _levels;
 
+    [SerializeField] private GameObject _startPanel;
     [SerializeField] private GameObject _winPanel;
     [SerializeField] private GameObject _diePanel;
     [SerializeField] private GameObject _pausePanel;
@@ -27,6 +28,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        _startPanel.gameObject.SetActive(true);
+        Pause();
         FirstLevel();
     }
 
@@ -96,6 +99,17 @@ public class GameManager : MonoBehaviour
         _pausePanel.gameObject.SetActive(true);
     }
 
+    public void HidePausePanel()
+    {
+        Unpause();
+        _pausePanel.gameObject.SetActive(false);
+    }
+
+    public bool IsPausePanelActive()
+    {
+        return _pausePanel.activeInHierarchy;
+    }
+
     private void UpdateLevel(int curLevel)
     {
         for (int i = 0; i < _levels.Length; i++)
@@ -106,6 +120,11 @@ public class GameManager : MonoBehaviour
                 Vector3 startPoint = _levels[i].GetComponent<Level>().GetStartLevelPosition();
                 Player.Instance.transform.position = startPoint;
                 Player.Instance.transform.Translate(0, 1, 0);
+
+                if (IsLastLevel())
+                {
+                    Player.Instance.Win();
+                }
             }
             else
             {

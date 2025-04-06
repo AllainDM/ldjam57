@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
     [SerializeField] float _movementRotationSpeed = 5.0f;
 
     private bool _isAlive = true;
+    private bool _isWin = false;
     private Vector3 _targetDirection; // Направление, куда нужно повернуться
 
     private Vector3 _lastMovementDirection;
@@ -46,7 +48,14 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P))
         {
-            GameManager.Instance.ShowPausePanel();
+            if (!GameManager.Instance.IsPausePanelActive())
+            {
+                GameManager.Instance.ShowPausePanel();
+            }
+            else
+            {
+                GameManager.Instance.HidePausePanel();
+            }
         }
     }
     // private void Start()
@@ -144,10 +153,27 @@ public class Player : MonoBehaviour
         _isAlive = false;
         _animator.SetBool("IsAlive", false);
         GameManager.Instance.ShowDiePanel();
+        _animator.SetBool("IsAlive", true);
     }
 
     public void Resurrect()
     {
         _isAlive = true;
+    }
+
+    public void Win()
+    {
+        _isWin = true;
+        _animator.SetBool("IsWin", _isWin);
+        StartCoroutine(EndDance());
+    }
+
+    IEnumerator EndDance()
+    {
+        yield return new WaitForSeconds(10.0f);
+        _isWin = false;
+        _animator.SetBool("IsWin", _isWin);
+        GameManager.Instance.ShowWinPanel();
+        //GameManager.Instance.Pause();
     }
 }
