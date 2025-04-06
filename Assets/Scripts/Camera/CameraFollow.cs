@@ -51,28 +51,58 @@ public class CameraFollow : MonoBehaviour
         }
     }
 
+    // private void UpdateCameraPosition()
+    // {
+    //     // 1. ВЫЧИСЛЯЕМ ПОВОРОТ КАМЕРЫ
+    //     // Создаем кватернион из текущих углов Эйлера
+    //     Quaternion rotation = Quaternion.Euler(_currentRotationY, _currentRotationX, 0);
+        
+    //     // 2. ВЫЧИСЛЯЕМ ПОЗИЦИЮ КАМЕРЫ
+    //     Vector3 targetPosition = target.position; // Позиция игрока
+    //     // Рассчитываем желаемую позицию с учетом поворота и смещения
+    //     Vector3 desiredPosition = targetPosition + rotation * new Vector3(0, height, -distance);
+        
+    //     // 3. ПЛАВНОЕ ПЕРЕМЕЩЕНИЕ
+    //     // SmoothDamp обеспечивает плавное движение с замедлением
+    //     transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, 
+    //         ref _smoothVelocity, smoothTime);
+        
+    //     // 4. НАПРАВЛЯЕМ КАМЕРУ НА ИГРОКА
+    //     // Смотрим на точку чуть выше основания игрока (для лучшего обзора)
+    //     transform.LookAt(targetPosition + Vector3.up * height * 0.5f);
+    // }
+
     private void UpdateCameraPosition()
     {
-        // 1. ВЫЧИСЛЯЕМ ПОВОРОТ КАМЕРЫ
-        // Создаем кватернион из текущих углов Эйлера
         Quaternion rotation = Quaternion.Euler(_currentRotationY, _currentRotationX, 0);
+        Vector3 targetPosition = target.position;
         
-        // 2. ВЫЧИСЛЯЕМ ПОЗИЦИЮ КАМЕРЫ
-        Vector3 targetPosition = target.position; // Позиция игрока
-        // Рассчитываем желаемую позицию с учетом поворота и смещения
-        Vector3 desiredPosition = targetPosition + rotation * new Vector3(0, height, -distance);
+        // Рассчитываем смещение камеры относительно игрока
+        Vector3 offset = rotation * new Vector3(0, height, -distance);
         
-        // 3. ПЛАВНОЕ ПЕРЕМЕЩЕНИЕ
-        // SmoothDamp обеспечивает плавное движение с замедлением
+        // Объявляем desiredPosition здесь, чтобы она была доступна во всей функции
+        Vector3 desiredPosition;
+        
+        // Проверяем коллизии камеры
+        RaycastHit hit;
+        if (Physics.Raycast(targetPosition, offset.normalized, out hit, offset.magnitude))
+        {
+            // Если есть препятствие, приближаем камеру
+            desiredPosition = hit.point - offset.normalized * 0.2f; // небольшой отступ
+        }
+        else
+        {
+            desiredPosition = targetPosition + offset;
+        }
+        
         transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, 
             ref _smoothVelocity, smoothTime);
         
-        // 4. НАПРАВЛЯЕМ КАМЕРУ НА ИГРОКА
-        // Смотрим на точку чуть выше основания игрока (для лучшего обзора)
-        transform.LookAt(targetPosition + Vector3.up * height * 0.5f);
+        // Сглаживаем поворот камеры
+        Quaternion lookRotation = Quaternion.LookRotation(targetPosition + Vector3.up * height * 0.5f - transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, smoothTime * Time.deltaTime * 10f);
     }
 }
-
 // public class CameraFollow : MonoBehaviour
 // {
 //     [SerializeField] private float _cameraOffsetX = 13.0f;

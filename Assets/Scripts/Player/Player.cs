@@ -51,45 +51,93 @@ public class Player : MonoBehaviour
 
     }
 
+    // private void HandleMovement()
+    // {
+    //     // 1. ПОЛУЧАЕМ ВВОД С КЛАВИАТУРЫ
+    //     // Input.GetAxis возвращает значение от -1 до 1 для осей WASD/стрелок
+    //     float horizontal = Input.GetAxis("Horizontal"); // A/D или ←/→
+    //     float vertical = Input.GetAxis("Vertical"); // W/S или ↑/↓
+        
+    //     // 2. РАССЧИТЫВАЕМ НАПРАВЛЕНИЕ ОТНОСИТЕЛЬНО КАМЕРЫ
+    //     // Берем направления вперед и вправо от камеры
+    //     Vector3 forward = CameraFollow.Instance.transform.forward;
+    //     Vector3 right = CameraFollow.Instance.transform.right;
+        
+    //     // Игнорируем наклон камеры (работаем только в горизонтальной плоскости)
+    //     forward.y = 0f;
+    //     right.y = 0f;
+    //     // Нормализуем векторы (приводим к длине 1)
+    //     forward.Normalize();
+    //     right.Normalize();
+        
+    //     // Комбинируем направления с учетом ввода игрока
+    //     _moveDirection = (forward * vertical + right * horizontal).normalized;
+        
+    //     // 3. ОБРАБАТЫВАЕМ ДВИЖЕНИЕ
+    //     if (_moveDirection.magnitude > 0.1f) // Если есть существенный ввод
+    //     {
+    //         // ПОВОРОТ ПЕРСОНАЖА:
+    //         // Создаем кватернион поворота в направлении движения
+    //         Quaternion targetRotation = Quaternion.LookRotation(_moveDirection);
+    //         // Плавно интерполируем текущий поворот к целевому
+    //         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 
+    //             _rotationSpeed * Time.deltaTime);
+            
+    //         // ПЕРЕМЕЩЕНИЕ:
+    //         // Двигаем персонажа через CharacterController
+    //         _characterController.Move(_moveDirection * (_speed * Time.deltaTime));
+    //         _animator.SetBool("IsWalk", true);
+    //     } else {
+    //         _animator.SetBool("IsWalk", false);
+    //     }
+    // }
     private void HandleMovement()
     {
-        // 1. ПОЛУЧАЕМ ВВОД С КЛАВИАТУРЫ
-        // Input.GetAxis возвращает значение от -1 до 1 для осей WASD/стрелок
-        float horizontal = Input.GetAxis("Horizontal"); // A/D или ←/→
-        float vertical = Input.GetAxis("Vertical"); // W/S или ↑/↓
+        float horizontal = Input.GetAxisRaw("Horizontal"); // Используем GetAxisRaw для мгновенного нуля
+        float vertical = Input.GetAxisRaw("Vertical");
         
-        // 2. РАССЧИТЫВАЕМ НАПРАВЛЕНИЕ ОТНОСИТЕЛЬНО КАМЕРЫ
-        // Берем направления вперед и вправо от камеры
+        // Получаем направление относительно камеры
         Vector3 forward = CameraFollow.Instance.transform.forward;
         Vector3 right = CameraFollow.Instance.transform.right;
-        
-        // Игнорируем наклон камеры (работаем только в горизонтальной плоскости)
         forward.y = 0f;
         right.y = 0f;
-        // Нормализуем векторы (приводим к длине 1)
         forward.Normalize();
         right.Normalize();
         
-        // Комбинируем направления с учетом ввода игрока
         _moveDirection = (forward * vertical + right * horizontal).normalized;
+
+        // Добавляем проверку на минимальный ввод
+        bool hasInput = Mathf.Abs(horizontal) > 0.01f || Mathf.Abs(vertical) > 0.01f;
         
-        // 3. ОБРАБАТЫВАЕМ ДВИЖЕНИЕ
-        if (_moveDirection.magnitude > 0.1f) // Если есть существенный ввод
+        if (hasInput)
         {
+
             // ПОВОРОТ ПЕРСОНАЖА:
             // Создаем кватернион поворота в направлении движения
             Quaternion targetRotation = Quaternion.LookRotation(_moveDirection);
             // Плавно интерполируем текущий поворот к целевому
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 
                 _rotationSpeed * Time.deltaTime);
+
+            // Мгновенный поворот без интерполяции
+            transform.rotation = Quaternion.LookRotation(_moveDirection);
             
-            // ПЕРЕМЕЩЕНИЕ:
-            // Двигаем персонажа через CharacterController
             _characterController.Move(_moveDirection * (_speed * Time.deltaTime));
             _animator.SetBool("IsWalk", true);
-        } else {
-            _animator.SetBool("IsWalk", false);
+
         }
+        else 
+        {
+            // Полный сброс состояния
+            _animator.SetBool("IsWalk", false);
+            _moveDirection = Vector3.zero;
+            
+            // Важно: принудительно останавливаем возможное вращение
+            transform.rotation = transform.rotation; // Фиксируем текущее вращение
+            
+        }
+        _model.transform.localPosition = new Vector3(0, 0, 0);
+        _model.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
     }
 
     public void Die()

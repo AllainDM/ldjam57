@@ -13,7 +13,7 @@ public class PlayerAttack : MonoBehaviour
     
     public LayerMask enemyLayer;
     
-    public float attackCooldown = 1f;
+    public float attackCooldown = 0f;
     
     public Color hitColor = Color.red;
     
