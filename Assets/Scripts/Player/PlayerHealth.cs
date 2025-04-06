@@ -46,7 +46,10 @@ public class PlayerHealth : MonoBehaviour
         GetComponent<Player>().enabled = false;
         
         // Запускаем респавн
-        Invoke(nameof(Respawn), respawnTime);
+        // Invoke(nameof(Respawn), respawnTime);
+
+        // Окно оповещения о смерти
+        GameManager.Instance.ShowDiePanel();
     }
 
     void Respawn()
