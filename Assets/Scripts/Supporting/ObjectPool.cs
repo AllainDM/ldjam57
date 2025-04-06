@@ -33,5 +33,18 @@ namespace Supporting
 
             return null;
         }
+
+        public void Reset()
+        {
+            if (_pooledObjects == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < _pooledObjects.Count; i++)
+            {
+                _pooledObjects[i].SetActive(false);
+            }
+        }
     }
 }

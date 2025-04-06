@@ -1,10 +1,16 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
     [SerializeField] private GameObject[] _levels;
+
+    [SerializeField] private GameObject _startPanel;
+    [SerializeField] private GameObject _winPanel;
+    [SerializeField] private GameObject _diePanel;
+    [SerializeField] private GameObject _pausePanel;
 
     private int _curLevel = 0;
 
@@ -22,6 +28,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        _startPanel.gameObject.SetActive(true);
+        Pause();
         FirstLevel();
     }
 
@@ -42,6 +50,7 @@ public class GameManager : MonoBehaviour
 
     public void FirstLevel()
     {
+        Unpause();
         _curLevel = 0;
         UpdateLevel(_curLevel);
     }
@@ -75,17 +84,30 @@ public class GameManager : MonoBehaviour
 
     public void ShowWinPanel()
     {
-
+        Pause();
+        _winPanel.gameObject.SetActive(true);
     }
 
     public void ShowDiePanel()
     {
-
+        _diePanel.gameObject.SetActive(true);
     }
 
     public void ShowPausePanel()
     {
+        Pause();
+        _pausePanel.gameObject.SetActive(true);
+    }
 
+    public void HidePausePanel()
+    {
+        Unpause();
+        _pausePanel.gameObject.SetActive(false);
+    }
+
+    public bool IsPausePanelActive()
+    {
+        return _pausePanel.activeInHierarchy;
     }
 
     private void UpdateLevel(int curLevel)
@@ -98,6 +120,11 @@ public class GameManager : MonoBehaviour
                 Vector3 startPoint = _levels[i].GetComponent<Level>().GetStartLevelPosition();
                 Player.Instance.transform.position = startPoint;
                 Player.Instance.transform.Translate(0, 1, 0);
+
+                if (IsLastLevel())
+                {
+                    Player.Instance.Win();
+                }
             }
             else
             {
