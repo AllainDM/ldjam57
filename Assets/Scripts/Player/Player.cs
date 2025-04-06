@@ -46,7 +46,14 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P))
         {
-            GameManager.Instance.ShowPausePanel();
+            if (!GameManager.Instance.IsPausePanelActive())
+            {
+                GameManager.Instance.ShowPausePanel();
+            }
+            else
+            {
+                GameManager.Instance.HidePausePanel();
+            }
         }
     }
     // private void Start()
