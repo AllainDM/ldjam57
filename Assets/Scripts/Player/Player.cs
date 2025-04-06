@@ -153,7 +153,6 @@ public class Player : MonoBehaviour
         _isAlive = false;
         _animator.SetBool("IsAlive", false);
         GameManager.Instance.ShowDiePanel();
-        _animator.SetBool("IsAlive", true);
     }
 
     public void Resurrect()
