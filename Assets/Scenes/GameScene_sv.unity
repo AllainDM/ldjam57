@@ -5163,8 +5163,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraOffsetX: 0
-  _cameraOffsetY: 10
-  _cameraOffsetZ: -8
+  _cameraOffsetY: 18
+  _cameraOffsetZ: -14
   _targetObject: {fileID: 1016387934}
 --- !u!114 &1929121099
 MonoBehaviour:
