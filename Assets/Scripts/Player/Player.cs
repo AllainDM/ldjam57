@@ -87,7 +87,11 @@ public class Player : MonoBehaviour
             // Двигаем персонажа через CharacterController
             _characterController.Move(_moveDirection * (_speed * Time.deltaTime));
             _animator.SetBool("IsWalk", true);
-        } else {
+
+            _model.transform.localPosition = new Vector3(0, 0, 0);
+            _model.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+        }
+        else {
             _animator.SetBool("IsWalk", false);
         }
     }
