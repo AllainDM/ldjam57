@@ -13207,6 +13207,32 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6744750743264947751}
   m_PrefabAsset: {fileID: 0}
+--- !u!143 &1016387935
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016387934}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1037150401
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23359,10 +23385,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21f4d51cbda3d8f4c9e56bd2fa3e59fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraOffsetX: 0
-  _cameraOffsetY: 18
-  _cameraOffsetZ: -14
-  _targetObject: {fileID: 1016387934}
+  target: {fileID: 0}
+  distance: 5
+  height: 2
+  rotationSpeed: 2
+  minVerticalAngle: -30
+  maxVerticalAngle: 60
+  smoothTime: 0.3
 --- !u!114 &1929121099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25808,7 +25837,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3560186076390036398, guid: 15b1f8da791aad441873eef619c59360,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1016387935}
   m_SourcePrefab: {fileID: 100100000, guid: 15b1f8da791aad441873eef619c59360, type: 3}
 --- !u!4 &6909172173953400200
 Transform:
