@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     
     [SerializeField] private Animator _animator;
     [SerializeField] private GameObject _model;
+    // [SerializeField] private Vector3 initialPosition;
 
     // Компоненты и приватные переменные
     private CharacterController _characterController; // Компонент для физического перемещения
@@ -20,8 +21,15 @@ public class Player : MonoBehaviour
     private bool _isAlive = true; // Флаг жизненного состояния
     private bool _isWin = false;
 
+    // private void Start()
+    // {
+        
+    // }
+
     private void Awake()
     {
+        // initialPosition = transform.position;
+        // Debug.Log(initialPosition);
         // Инициализация синглтона
         if (Instance == null) Instance = this;
         else Destroy(gameObject); // Уничтожаем дубликаты
@@ -32,6 +40,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        // transform.position.y = initialPosition.y;
+        // transform.position.y = initialPosition.y;
         if (!_isAlive) return; // Если игрок мертв - не обрабатываем движение
         
         HandleMovement(); // Обрабатываем движение каждый кадр
@@ -136,7 +146,9 @@ public class Player : MonoBehaviour
             transform.rotation = transform.rotation; // Фиксируем текущее вращение
             
         }
-        _model.transform.localPosition = new Vector3(0, 0, 0);
+        // _model.transform.localPosition = new Vector3(_model.transform.localPosition.x, -1, _model.transform.localPosition.z);
+
+        _model.transform.localPosition = new Vector3(0, -1, 0);
         _model.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
     }
 
