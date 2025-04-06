@@ -120,6 +120,11 @@ public class GameManager : MonoBehaviour
                 Vector3 startPoint = _levels[i].GetComponent<Level>().GetStartLevelPosition();
                 Player.Instance.transform.position = startPoint;
                 Player.Instance.transform.Translate(0, 1, 0);
+
+                if (IsLastLevel())
+                {
+                    Player.Instance.Win();
+                }
             }
             else
             {
