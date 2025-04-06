@@ -19,6 +19,8 @@ public class ExplosiveSpawner : MonoBehaviour
     [SerializeField] private int _damage = 1;
 
     private ObjectPool _objectPool;
+    private bool _enabled = true;
+
     private void Start()
     {
         _prefabDangerZone.transform.localScale = new Vector3(_distance * 2.0f , 0.1f, _distance * 2.0f);
@@ -26,8 +28,25 @@ public class ExplosiveSpawner : MonoBehaviour
         _objectPool = new ObjectPool(_ballAmount, _prefabBall);
         InvokeRepeating("SpawnBall", _delay, _repeatRate);
     }
+
+    private void OnDisable()
+    {
+        _enabled = false;
+        _objectPool.Reset();
+    }
+
+    private void OnEnable()
+    {
+        enabled = true;
+    }
+
     private void SpawnBall()
     {
+        if (!_enabled)
+        {
+            return;
+        }
+
         GameObject ball = _objectPool.GetObject();
 
         if (ball != null)
