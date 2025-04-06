@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public static Player Instance { get; private set; }
 
     [SerializeField] private Animator _animator;
+    [SerializeField] private GameObject _model;
 
     [SerializeField] float _speed = 4.0f;
     // [SerializeField] float _sensitivityHor = 100.0f;
@@ -102,6 +103,9 @@ public class Player : MonoBehaviour
             {
                 RotateTowardsDirection(_lastMovementDirection, _movementRotationSpeed);
             }
+
+            _model.transform.localPosition = new Vector3(0, 0, 0);
+            _model.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
         }
         else
         {
