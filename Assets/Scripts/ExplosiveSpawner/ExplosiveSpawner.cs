@@ -32,7 +32,11 @@ public class ExplosiveSpawner : MonoBehaviour
     private void OnDisable()
     {
         _enabled = false;
-        _objectPool.Reset();
+
+        if (_objectPool != null)
+        {
+            _objectPool.Reset();
+        }
     }
 
     private void OnEnable()
