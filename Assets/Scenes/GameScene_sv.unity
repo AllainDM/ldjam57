@@ -6014,6 +6014,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExplosiveSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 8212162583824202878, guid: 8ecd95687a17d7347b0cf473db66c852,
+        type: 3}
+      propertyPath: _ballAmount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212162583824202878, guid: 8ecd95687a17d7347b0cf473db66c852,
+        type: 3}
+      propertyPath: _repeatRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8559121826191647292, guid: 8ecd95687a17d7347b0cf473db66c852,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
