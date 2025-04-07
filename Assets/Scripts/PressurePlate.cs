@@ -56,7 +56,7 @@ public class PressurePlate : MonoBehaviour
 {
     [SerializeField] private GateController gateController;
     [SerializeField] private float pressDownDistance = 0.05f;
-    [SerializeField] private float pressSpeed = 3f;
+    // [SerializeField] private float pressSpeed = 3f;
     
     private Vector3 initialPosition;
     private bool isPressed = false;
@@ -80,7 +80,7 @@ public class PressurePlate : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("void OnTriggerEnter(Collider other)");
+        // Debug.Log("void OnTriggerEnter(Collider other)");
         // if (other.CompareTag("MovableObject"))
         // if (other.CompareTag("Player") || other.CompareTag("MovableObject"))
         // {
@@ -95,7 +95,7 @@ public class PressurePlate : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        Debug.Log("void OnTriggerExit(Collider other)");
+        // Debug.Log("void OnTriggerExit(Collider other)");
         // if (other.CompareTag("MovableObject"))
         // if (other.CompareTag("Player") || other.CompareTag("MovableObject"))
         // {

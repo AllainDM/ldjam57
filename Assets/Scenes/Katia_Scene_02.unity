@@ -2254,7 +2254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &303243248
 Transform:
   m_ObjectHideFlags: 0
@@ -6445,17 +6445,17 @@ PrefabInstance:
     - target: {fileID: 1378994504496788375, guid: 5dae2662717a6471bbd553e72206ba76,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.190381
+      value: -12.1
       objectReference: {fileID: 0}
     - target: {fileID: 1378994504496788375, guid: 5dae2662717a6471bbd553e72206ba76,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.309
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1378994504496788375, guid: 5dae2662717a6471bbd553e72206ba76,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -17.487
+      value: -24.6
       objectReference: {fileID: 0}
     - target: {fileID: 1378994504496788375, guid: 5dae2662717a6471bbd553e72206ba76,
         type: 3}
@@ -6550,6 +6550,11 @@ PrefabInstance:
     - target: {fileID: 8537877529471259667, guid: 5dae2662717a6471bbd553e72206ba76,
         type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537877529471259667, guid: 5dae2662717a6471bbd553e72206ba76,
+        type: 3}
+      propertyPath: m_Center.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8564797796397587859, guid: 5dae2662717a6471bbd553e72206ba76,
@@ -8156,6 +8161,7 @@ GameObject:
   - component: {fileID: 1275840832}
   - component: {fileID: 1275840831}
   - component: {fileID: 1275840830}
+  - component: {fileID: 1275840834}
   - component: {fileID: 1275840829}
   m_Layer: 0
   m_Name: PlayerCamera
@@ -8171,7 +8177,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1275840828}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21f4d51cbda3d8f4c9e56bd2fa3e59fa, type: 3}
   m_Name: 
@@ -8301,6 +8307,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 45, y: 90, z: 0}
+--- !u!114 &1275840834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275840828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f42ee80d437e2c4caa4e20d6b981e35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 2061784537}
+  offset: {x: -10, y: 10, z: 0}
 --- !u!1001 &1305495047
 PrefabInstance:
   m_ObjectHideFlags: 0

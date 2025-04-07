@@ -118,9 +118,26 @@ public class GameManager : MonoBehaviour
             {
                 _levels[i].SetActive(true);
                 Vector3 startPoint = _levels[i].GetComponent<Level>().GetStartLevelPosition();
-                Debug.Log(startPoint);
+                
+                Debug.Log($"Player current position before move: {Player.Instance.transform.position}");
+
+                // Player.Instance.Teleport(startPoint + Vector3.up);
+
+                // if (Player.Instance.TryGetComponent<CharacterController>(out var cc))
+                // {
+                //     cc.enabled = false;  // Отключаем контроллер перед изменением позиции
+                //     Player.Instance.transform.position = startPoint + Vector3.up;
+                //     cc.enabled = true;   // Включаем обратно
+                // }
+                // else
+                // {
+                //     Player.Instance.transform.position = startPoint + Vector3.up;
+                // }
+
                 Player.Instance.transform.position = startPoint;
                 Player.Instance.transform.Translate(0, 1, 0);
+                Debug.Log($"Player position after move: {Player.Instance.transform.position}");
+                Debug.Log(Player.Instance.gameObject.GetInstanceID());
 
                 if (IsLastLevel())
                 {
