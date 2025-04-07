@@ -118,6 +118,7 @@ public class GameManager : MonoBehaviour
             {
                 _levels[i].SetActive(true);
                 Vector3 startPoint = _levels[i].GetComponent<Level>().GetStartLevelPosition();
+                Debug.Log(startPoint);
                 Player.Instance.transform.position = startPoint;
                 Player.Instance.transform.Translate(0, 1, 0);
 
